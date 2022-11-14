@@ -4,13 +4,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/style.css">
   <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-  <main>
-    <div class="container">
-      {% block content %}{% endblock %}
+  <header>
+    <div class="top-banner-color"></div>
+    <h1>Login Exercise</h1>
+    <div class="login-out-div">
+      {% if 'username' not in session %}
+      <a href="/register" class="log-links">Register</a>
+      <a href="/login" class="log-links">Login</a>
+      {% else %}
+      <form method="post" action="/logout"> 
+        <button type="submit" class="button-to-link log-links">Logout</a>
+      </form>
+      {% endif %}
     </div>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
   </main>
 </body>
 </html>
