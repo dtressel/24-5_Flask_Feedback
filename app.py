@@ -41,7 +41,7 @@ def show_register_form():
         # add user to session
         session['username'] = new_user.username
 
-        return redirect('/secret')
+        return redirect(f'/users/{new_user.username}')
     else:
         print('rendering register.html')
         return render_template('register.html', form = form)
@@ -61,16 +61,28 @@ def show_login_page():
             # add user to session
             session['username'] = authenticated_user.username
 
-            return redirect('/secret')
+            return redirect(f'/users/{authenticated_user.username}')
         else:
             form.password.errors = ['Incorrect username or password.']
     return render_template('login.html', form = form)
 
-@app.route('/secret')
-def show_secret():
-    """Shows secret message that only logged in users can see"""
+@app.route('/users/<username>')
+def show_user_page(username):
+    """Shows user page."""
 
-    return "You made it!"
+    # If there is a logged in user
+    if 'username' in session:
+        # If logged in user matches requested user page
+        if session['username'] == username:
+            user = User.query.get(username)
+            return render_template('user_page.html', user=user)
+        # If logged in user doesn't match, redirect to logged-in user's page
+        else:
+            actual_username = session['username']
+            return redirect(f'/users/{actual_username}')
+            
+    # If no logged in user, redirect to login page
+    return redirect('/login')
 
 @app.route('/logout', methods = ['POST'])
 def logout_user():
