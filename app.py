@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, flash, session
-from models import db, connect_db, User
+from models import db, connect_db, User, Feedback
 from forms import UserRegistrationForm, UserLoginForm
 
 app = Flask(__name__)
@@ -12,6 +12,7 @@ app.config['SECRET_KEY'] = 'fruitsmell9753'
 connect_db(app)
 
 # with app.app_context():
+#     db.drop_all()
 #     db.create_all()
 
 @app.route('/')
@@ -72,14 +73,8 @@ def show_user_page(username):
 
     # If there is a logged in user
     if 'username' in session:
-        # If logged in user matches requested user page
-        if session['username'] == username:
-            user = User.query.get(username)
-            return render_template('user_page.html', user=user)
-        # If logged in user doesn't match, redirect to logged-in user's page
-        else:
-            actual_username = session['username']
-            return redirect(f'/users/{actual_username}')
+        user = User.query.get(username)
+        return render_template('user_page.html', user=user)
             
     # If no logged in user, redirect to login page
     return redirect('/login')
