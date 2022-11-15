@@ -8,4 +8,16 @@
 <div>Email: {{user.email}}</div>
 <div>First Name: {{user.first_name}}</div>
 <div>Last Name: {{user.last_name}}</div>
+{% for feedback in user.feedbacks %}
+  <div class="feedback-group">
+    <h3>feedback.title</h3>
+    {% if session['username'] == user.username %}
+      <form method="post" action="/feedback/{{feedback.id}}/delete">
+        <a href="/feedback/{{feedback.id}}/update" class="link-to-button">Edit</a>
+        <button type="submit">Delete</button>
+      </form>
+    {% endif %}
+    <p>feedback.content</p>
+  </div>
+{% endfor %}
 {% endblock %}
