@@ -10,14 +10,20 @@
 <div>Last Name: {{user.last_name}}</div>
 {% for feedback in user.feedbacks %}
   <div class="feedback-group">
-    <h3>feedback.title</h3>
+    <h3>{{feedback.title}}</h3>
     {% if session['username'] == user.username %}
       <form method="post" action="/feedback/{{feedback.id}}/delete">
         <a href="/feedback/{{feedback.id}}/update" class="link-to-button">Edit</a>
         <button type="submit">Delete</button>
       </form>
     {% endif %}
-    <p>feedback.content</p>
+    <p>{{feedback.content}}</p>
   </div>
 {% endfor %}
+{% if session['username'] == user.username %}
+  <form method="post" action="/users/{{user.username}}/delete">
+    <a href="/users/{{user.username}}/feedback/add" class="link-to-button">Add Feedback</a>
+    <button type="submit">Delete User</button>
+  </form>
+{% endif %}
 {% endblock %}

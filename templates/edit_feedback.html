@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Feedback{% endblock %}
+
+{% block content %}
+<h2>New Feedback:</h2>
+<form method="POST">
+  {{form.hidden_tag()}}
+    <div class="form-row">
+      {{form.title.label}}
+      {{form.title(value = feedback.title)}}
+    </div>
+    {% for err in form.title.errors %}
+      <div class="error-row">
+        {{err}}
+      </div>
+    {% endfor %}
+    <div class="form-row">
+      {{form.content.label}}
+      <!-- Instead of {{form.content}}, I'm using the following to add a value to textarea -->
+      <textarea id="content" name="content" required>{{feedback.content}}</textarea>
+    </div>
+    {% for err in form.content.errors %}
+      <div class="error-row">
+        {{err}}
+      </div>
+    {% endfor %}
+  <button type="submit">Submit</button>
+</form>
+{% endblock %}
