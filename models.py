@@ -13,7 +13,7 @@ class User(db.Model):
     __tablename__ = 'users'
 
     username = db.Column(
-        db.String,
+        db.String(20),
         primary_key = True
     )
     password = db.Column(
@@ -21,17 +21,18 @@ class User(db.Model):
         nullable = False
     )
     email = db.Column(
-        db.String,
+        db.String(50),
         nullable = False
     )
     first_name = db.Column(
-        db.String,
+        db.String(30),
         nullable = False
     )    
     last_name = db.Column(
-        db.String,
+        db.String(30),
         nullable = False
     )
+    feedbacks = db.relationship('Feedback', cascade="all, delete")
 
     @classmethod
     def create_user(cls, username, password, email, first_name, last_name):
@@ -60,7 +61,7 @@ class User(db.Model):
             return False
 
 class Feedback(db.Model):
-    __tablename__ = 'feedback'
+    __tablename__ = 'feedbacks'
 
     id = db.Column(
         db.Integer,
@@ -80,4 +81,4 @@ class Feedback(db.Model):
         db.ForeignKey('users.username'),
         nullable = False
     )
-    user = db.relationship('User', backref = 'feedback')
+    user = db.relationship('User')
