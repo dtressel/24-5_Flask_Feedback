@@ -92,6 +92,7 @@ def delete_user(username):
     user_to_delete = User.query.get(username)
     db.session.delete(user_to_delete)
     db.session.commit()
+    session.pop('username')
 
     return redirect('/')
 
@@ -126,7 +127,7 @@ def edit_feedback(feedback_id):
         feedback_to_edit.content = form.content.data
         db.session.add(feedback_to_edit)
         db.session.commit()
-        return redirect(f'/users/{feedback_to_edit.user}')
+        return redirect(f'/users/{feedback_to_edit.user.username}')
 
     return render_template('edit_feedback.html', form = form, feedback = feedback_to_edit)
 

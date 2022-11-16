@@ -32,7 +32,7 @@ class User(db.Model):
         db.String(30),
         nullable = False
     )
-    feedbacks = db.relationship('Feedback', cascade="all, delete")
+    feedbacks = db.relationship('Feedback', cascade="all, delete", backref = "user")
 
     @classmethod
     def create_user(cls, username, password, email, first_name, last_name):
@@ -81,4 +81,3 @@ class Feedback(db.Model):
         db.ForeignKey('users.username'),
         nullable = False
     )
-    user = db.relationship('User')
