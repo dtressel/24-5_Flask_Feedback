@@ -4,26 +4,29 @@
 
 {% block content %}
 <h2>Info for {{user.username}}:</h2>
-<div>Username: {{user.username}}</div>
-<div>Email: {{user.email}}</div>
-<div>First Name: {{user.first_name}}</div>
-<div>Last Name: {{user.last_name}}</div>
+<div><b>Username:</b> {{user.username}}</div>
+<div><b>Email:</b> {{user.email}}</div>
+<div><b>First Name:</b> {{user.first_name}}</div>
+<div><b>Last Name:</b> {{user.last_name}}</div>
+<h2>Feedback:</h2>
 {% for feedback in user.feedbacks %}
   <div class="feedback-group">
-    <h3>{{feedback.title}}</h3>
-    {% if session['username'] == user.username %}
-      <form method="post" action="/feedback/{{feedback.id}}/delete">
-        <a href="/feedback/{{feedback.id}}/update" class="link-to-button">Edit</a>
-        <button type="submit">Delete</button>
-      </form>
-    {% endif %}
+    <div class="title-row">
+      <h3>{{feedback.title}}</h3>
+      {% if session['username'] == user.username %}
+        <form method="post" action="/feedback/{{feedback.id}}/delete">
+          <a href="/feedback/{{feedback.id}}/update" class="link-to-button button-small b-edit">Edit</a>
+          <button type="submit" class="button-small b-danger">Delete</button>
+        </form>
+      {% endif %}
+    </div>
     <p>{{feedback.content}}</p>
   </div>
 {% endfor %}
 {% if session['username'] == user.username %}
   <form method="post" action="/users/{{user.username}}/delete">
-    <a href="/users/{{user.username}}/feedback/add" class="link-to-button">Add Feedback</a>
-    <button type="submit">Delete User</button>
+    <a href="/users/{{user.username}}/feedback/add" class="link-to-button button b-success">Add Feedback</a>
+    <button type="submit" class="button b-danger">Delete User</button>
   </form>
 {% endif %}
 {% endblock %}

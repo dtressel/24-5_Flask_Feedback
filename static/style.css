@@ -1,3 +1,11 @@
+* {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+main {
+  margin: 0 10%;
+}
+
 h1 {
   text-align: center;
   background-color: rgb(186, 93, 93);
@@ -5,6 +13,10 @@ h1 {
   grid-column: 2 / 3;
   margin: 0;
   padding: 10px 0;
+}
+
+h3 {
+  margin: 4px 12px 4px;
 }
 
 header {
@@ -28,6 +40,7 @@ header {
 
 .log-links {
   margin: 0 10px;
+  font-size: 1rem;
 }
 
 .button-to-link {
@@ -40,6 +53,94 @@ header {
 }
 
 .feedback-group {
-  border: 1px solid black;
+  border: 1px solid gray;
   border-radius: 10px;
+  margin: 8px 0;
+  padding: 8px 12px 0;
+}
+
+.link-to-button {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button, .button-small {
+  border-radius: 4px;
+  border: none;
+}
+
+.button {
+  font-size: 1rem;
+  padding: 8px 12px;
+}
+
+.button-small {
+  font-size: 0.85rem;
+  padding: 6px 9px;
+}
+
+.button:hover, .button-small:hover {
+  cursor: pointer;
+}
+
+.b-success {
+  background-color: rgb(83, 148, 80);
+  color: white;
+}
+
+.b-success:hover {
+  background-color: rgb(58, 109, 55);
+}
+
+.b-danger {
+  background-color: rgb(187, 85, 85);
+  color: white;
+}
+
+.b-danger:hover {
+  background-color: rgb(110, 30, 30);
+}
+
+.b-edit {
+  background-color: rgb(99, 99, 99);
+  color: white;
+}
+
+.b-edit:hover {
+  background-color: rgb(74, 74, 74);
+}
+
+.title-row {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.feedback-group:last-of-type {
+  margin-bottom: 18px;
+}
+
+.form-row {
+  margin-top: 14px;
+  display: flex;
+}
+
+.form-row > label, .spacer {
+  flex: 1;
+}
+
+.form-row > input, .form-row > textarea, .button-div {
+  flex: 6;
+}
+
+input, textarea {
+  border: 1px solid rgb(178, 178, 178);
+  border-radius: 3px;
+  padding: 5px;
+}
+
+input:focus, textarea:focus {
+  border-color: rgb(186, 93, 93);
+  box-shadow: 0 0 5px rgb(186, 93, 93);
+  outline: 0 none;
 }
