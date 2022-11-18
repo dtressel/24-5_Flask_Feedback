@@ -14,7 +14,7 @@
       <div class="error-row">
         {{err}}
       </div>
-    {% endfor %}
+    {% endfor %}         
     <div class="form-row">
       {{form.content.label}}
       <!-- Instead of {{form.content}}, I'm using the following to add a value to textarea -->
@@ -22,7 +22,8 @@
     </div>
     {% for err in form.content.errors %}
       <div class="error-row">
-        {{err}}
+        <div class="spacer"></div>
+        <div class="error-div">{{err}}</div>
       </div>
     {% endfor %}
   <div class="form-row">

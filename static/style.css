@@ -125,11 +125,19 @@ header {
   display: flex;
 }
 
+.error-row {
+  color: red;
+  font-style: italic;
+  margin-top: 6px;
+  display: flex;
+  font-size: 0.9rem;
+}
+
 .form-row > label, .spacer {
   flex: 1;
 }
 
-.form-row > input, .form-row > textarea, .button-div {
+.form-row > input, .form-row > textarea, .button-div, .error-div {
   flex: 6;
 }
 
