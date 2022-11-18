@@ -36,14 +36,20 @@ def show_register_form():
             password = form.password.data
             )
         db.session.add(new_user)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except Exception as err:
+            if err.code == 'gkpj':
+                form.username.errors.append(f"{err.params['username']} already exists.")
+            else:
+                form.username.errors.append('Registration failed. Please try again later.')
+            return render_template('register.html', form = form)
 
         # add user to session
         session['username'] = new_user.username
 
         return redirect(f'/users/{new_user.username}')
     else:
-        print('rendering register.html')
         return render_template('register.html', form = form)
 
 @app.route('/login', methods = ['GET', 'POST'])
